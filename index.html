@@ -119,7 +119,7 @@
           </div>
 
           <p class="text-xs sm:text-sm text-sky-100/95 leading-relaxed">
-            攜帶專業工具到府服務，先確認型號與透明報價再施作。預約貼膜享全機清潔服務，可將想挑的保護貼、cowhorn 傳輸線、DEVILCASE 惡魔防摔殼與五匹車架加入購物車一次加總後傳給彼特。
+            攜帶專業工具到府服務，先確認型號與透明報價再施作。預約貼膜享全機清潔服務，可將想挑的保護貼（直接在每款卡片下拉選機型）、cowhorn 傳輸線、DEVILCASE 惡魔防摔殼與五匹車架加入購物車一次加總後傳給彼特。
           </p>
         </div>
 
@@ -191,14 +191,14 @@
       </div>
     </section>
 
-    <!-- 保護貼型號查詢、報價與功能篩選區 -->
+    <!-- 保護貼報價、型號下拉選單與功能篩選區 -->
     <section id="protectors" class="bg-white/95 rounded-3xl p-5 sm:p-6 border border-sky-100 shadow-sm space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
           <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600">Screen & Lens Protectors</span>
-          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">保護貼型號查詢・報價與功能篩選</h2>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">保護貼報價・型號下拉選單與功能篩選</h2>
         </div>
-        <p class="text-xs text-slate-500">點選款式加入購物車，也可點選下方型號把機型帶入訂單備註</p>
+        <p class="text-xs text-slate-500">在每款保護貼下方下拉選擇手機/平板型號，再點「加入購物車」</p>
       </div>
 
       <!-- 搜尋與功能標籤列 -->
@@ -207,7 +207,7 @@
           <input
             id="protectorSearch"
             type="text"
-            oninput="renderAllProtectorSection()"
+            oninput="renderProtectors()"
             placeholder="搜尋機型或款式，例如：iPhone 18、S26 ULTRA、Pixel 11、X300、防窺、鏡頭貼..."
             class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition"
           />
@@ -219,30 +219,9 @@
         </div>
       </div>
 
-      <!-- 保護貼款式卡片列表 -->
+      <!-- 保護貼款式卡片列表（每張卡片內含手機型號下拉選單） -->
       <div id="protectorGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- 由 JS 渲染 -->
-      </div>
-
-      <!-- 保護貼型號查詢（品牌機型清單） -->
-      <div class="pt-4 border-t border-slate-100 space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <h3 class="text-base sm:text-lg font-black text-slate-900">手機與平板型號查詢（依品牌分類）</h3>
-            <p class="text-xs text-slate-500">點選任一型號可直接帶入購物車備註型號</p>
-          </div>
-          <span id="modelMatchCount" class="text-xs font-bold text-sky-700 bg-sky-50 px-3 py-1 rounded-full self-start sm:self-auto">
-            <!-- 由 JS 顯示筆數 -->
-          </span>
-        </div>
-
-        <div id="brandFilterChips" class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-          <!-- 由 JS 渲染品牌篩選標籤 -->
-        </div>
-
-        <div id="phoneModelGroups" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          <!-- 由 JS 渲染品牌與機型 -->
-        </div>
       </div>
     </section>
 
@@ -366,7 +345,7 @@
       <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-sky-50/60">
         <div>
           <h3 class="text-lg font-black text-slate-900">已選商品購物車</h3>
-          <p class="text-xs text-slate-500">可增減數量、填寫機型/地區後一鍵複製或傳送至 LINE（@wks8271u）</p>
+          <p class="text-xs text-slate-500">可增減數量、填寫備註後一鍵複製或傳送至 LINE（@wks8271u）</p>
         </div>
         <button onclick="closeCartDrawer()" class="w-8 h-8 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 font-bold flex items-center justify-center">
           ✕
@@ -382,12 +361,12 @@
       <div class="px-5 py-4 border-t border-slate-100 bg-slate-50/80 space-y-3">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <div>
-            <label class="block text-[11px] font-bold text-slate-700 mb-1">手機型號 / 備註</label>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">補充備註（選填）</label>
             <input
               id="orderDeviceNote"
               type="text"
               oninput="updateOrderPreview()"
-              placeholder="例如：iPhone 18 Pro / S26 ULTRA"
+              placeholder="例如：需全機清潔、指定某款色系"
               class="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
             />
           </div>
@@ -447,7 +426,7 @@
       {
         id: "prot-hd-glass",
         name: "高透滿版鋼化玻璃貼",
-        modelHint: "支援 iPhone / 三星 / Pixel / 小米 / OPPO / VIVO 等多款機型",
+        modelHint: "支援多品牌手機與平板，請在下方下拉選單選擇型號",
         price: 390,
         features: ["高透光", "滑順抗指紋", "附全機清潔"],
         isNew: false,
@@ -456,7 +435,7 @@
       {
         id: "prot-anti-peep",
         name: "28度防窺鋼化玻璃貼",
-        modelHint: "通勤搭車隱私防護首選",
+        modelHint: "通勤搭車隱私防護首選，請在下方下拉選單選擇型號",
         price: 490,
         features: ["防窺隱私", "滑順抗指紋", "附全機清潔"],
         isNew: true,
@@ -465,7 +444,7 @@
       {
         id: "prot-blue-light",
         name: "護眼抗藍光玻璃貼",
-        modelHint: "長時間追劇 / 滑手機適用",
+        modelHint: "長時間追劇 / 滑手機適用，請在下方下拉選單選擇型號",
         price: 450,
         features: ["抗藍光", "高透光", "附全機清潔"],
         isNew: false,
@@ -474,7 +453,7 @@
       {
         id: "prot-matte-film",
         name: "電競霧面抗眩光保護貼",
-        modelHint: "手遊玩家 / 戶外強光不易反光",
+        modelHint: "手遊玩家 / 戶外強光不易反光，請在下方下拉選單選擇型號",
         price: 420,
         features: ["霧面抗眩光", "滑順抗指紋", "附全機清潔"],
         isNew: false,
@@ -483,7 +462,7 @@
       {
         id: "prot-lens-ring",
         name: "藍寶石/金屬邊框鏡頭保護貼",
-        modelHint: "多鏡頭模組精準貼合",
+        modelHint: "多鏡頭模組精準貼合，請在下方下拉選單選擇型號",
         price: 290,
         features: ["鏡頭防護", "高透光", "不影響拍照"],
         isNew: true,
@@ -491,8 +470,8 @@
       }
     ];
 
-    // 2. 保護貼型號查詢用之品牌機型清單（已排除老人機，不含容量/顏色/價格）
-    const PHONE_MODEL_CATALOG = [
+    // 2. 各品牌手機與平板型號清單（已排除老人機，不含容量/顏色/價格）
+    const PHONE_MODEL_GROUPS = [
       {
         brand: "iPhone / iPad",
         models: [
@@ -786,9 +765,14 @@
 
     // 狀態管理
     let selectedFeature = "全部";
-    let selectedBrand = "全部品牌";
     let cableLength = "1m";
     let selectedCategory = "全部";
+    // 每款保護貼目前下拉選單選到的型號
+    const selectedProtectorModels = {};
+    PROTECTOR_ITEMS.forEach(p => {
+      selectedProtectorModels[p.id] = PHONE_MODEL_GROUPS[0].models[0];
+    });
+
     // 購物車陣列：{ key, id, name, variant, unitPrice, qty, priceNote }
     let cart = [];
 
@@ -835,6 +819,25 @@
       showToast(`已加入購物車：${name}${variant ? `（${variant}）` : ""}`);
     }
 
+    function addProtectorToCart(protectorId) {
+      const item = PROTECTOR_ITEMS.find(p => p.id === protectorId);
+      if (!item) return;
+      const selectEl = document.getElementById(`modelSelect-${protectorId}`);
+      const chosenModel = selectEl ? selectEl.value : (selectedProtectorModels[protectorId] || "");
+      selectedProtectorModels[protectorId] = chosenModel;
+      addToCart({
+        id: item.id,
+        name: item.name,
+        variant: chosenModel,
+        unitPrice: item.price
+      });
+    }
+
+    function onProtectorModelChange(protectorId, val) {
+      selectedProtectorModels[protectorId] = val;
+      renderProtectors();
+    }
+
     function changeCartQty(key, delta) {
       const idx = cart.findIndex(i => i.key === key);
       if (idx === -1) return;
@@ -872,13 +875,13 @@
     }
 
     function buildOrderMessage() {
-      const device = (document.getElementById("orderDeviceNote")?.value || "").trim() || "未填寫";
+      const note = (document.getElementById("orderDeviceNote")?.value || "").trim();
       const area = (document.getElementById("orderAreaNote")?.value || "").trim() || "大台中地區";
       const { totalQty, totalAmount } = getCartTotals();
 
       if (!cart.length) {
         return `您好，想向「彼特到府工作室 / 彼特通訊工作室」預約與詢價：
-• 手機型號 / 備註：${device}
+• 補充備註：${note || "無"}
 • 地點與時間：${area}
 麻煩協助確認報價與可約時段，謝謝！`;
       }
@@ -895,8 +898,7 @@ ${lines.join("\n")}
 ----------------------
 合計件數：${totalQty} 件
 購物車總金額：NT$${totalAmount.toLocaleString()}
-• 手機型號 / 備註：${device}
-• 地點與時間：${area}
+${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
 （實際成交金額依現場型號/款式確認為準，謝謝！）`;
     }
 
@@ -930,7 +932,7 @@ ${lines.join("\n")}
             <div class="text-center py-10 space-y-2">
               <div class="text-3xl">🛒</div>
               <div class="text-sm font-bold text-slate-700">購物車目前還沒有商品</div>
-              <p class="text-xs text-slate-500">在保護貼、cowhorn 傳輸線或商品目錄卡片下方點「加入購物車」，即可自動加總金額。</p>
+              <p class="text-xs text-slate-500">在保護貼選擇型號並點「加入購物車」，或挑選傳輸線/防摔殼/五匹車架，即可自動加總金額。</p>
             </div>
           `;
         } else {
@@ -1002,17 +1004,43 @@ ${lines.join("\n")}
       }
     }
 
-    function pickModelToNote(brand, model) {
-      const input = document.getElementById("orderDeviceNote");
-      const current = (input?.value || "").trim();
-      const tag = `${brand} - ${model}`;
-      if (!current) {
-        input.value = tag;
-      } else if (!current.includes(model)) {
-        input.value = `${current}、${model}`;
+    // 產生每張保護貼卡片內的品牌分組下拉選單 <option>
+    function buildModelDropdownOptions(selectedValue, searchQuery) {
+      const q = (searchQuery || "").trim().toLowerCase();
+      const optionsHtml = [];
+      let matchedAny = false;
+
+      PHONE_MODEL_GROUPS.forEach(group => {
+        const filteredModels = group.models.filter(m => {
+          if (!q) return true;
+          return m.toLowerCase().includes(q) || group.brand.toLowerCase().includes(q);
+        });
+        if (filteredModels.length > 0) {
+          matchedAny = true;
+          optionsHtml.push(`<optgroup label="${group.brand}">`);
+          filteredModels.forEach(model => {
+            const isSel = selectedValue === model ? "selected" : "";
+            optionsHtml.push(`<option value="${model.replace(/"/g, "&quot;")}" ${isSel}>${model}</option>`);
+          });
+          optionsHtml.push(`</optgroup>`);
+        }
+      });
+
+      if (!matchedAny) {
+        PHONE_MODEL_GROUPS.forEach(group => {
+          optionsHtml.push(`<optgroup label="${group.brand}">`);
+          group.models.forEach(model => {
+            const isSel = selectedValue === model ? "selected" : "";
+            optionsHtml.push(`<option value="${model.replace(/"/g, "&quot;")}" ${isSel}>${model}</option>`);
+          });
+          optionsHtml.push(`</optgroup>`);
+        });
       }
-      updateOrderPreview();
-      showToast(`已帶入機型：${tag}`);
+
+      const unspecSel = selectedValue === "未指定型號（待確認）" ? "selected" : "";
+      optionsHtml.push(`<optgroup label="其他"><option value="未指定型號（待確認）" ${unspecSel}>未指定型號（待確認）</option></optgroup>`);
+
+      return optionsHtml.join("");
     }
 
     // 渲染保護貼功能篩選標籤
@@ -1044,7 +1072,7 @@ ${lines.join("\n")}
       renderProtectors();
     }
 
-    // 渲染保護貼款式卡片（按鈕改為加入購物車）
+    // 渲染保護貼款式卡片（每張卡片內嵌手機型號下拉式選單 + 加入購物車按鈕）
     function renderProtectors() {
       const q = (document.getElementById("protectorSearch").value || "").trim().toLowerCase();
       const filtered = PROTECTOR_ITEMS.filter(item => {
@@ -1053,11 +1081,16 @@ ${lines.join("\n")}
           (selectedFeature === "新品上架" && item.isNew) ||
           item.features.includes(selectedFeature);
 
+        const matchModel = PHONE_MODEL_GROUPS.some(g =>
+          g.models.some(m => m.toLowerCase().includes(q) || g.brand.toLowerCase().includes(q))
+        );
+
         const matchText =
           !q ||
           item.name.toLowerCase().includes(q) ||
           item.modelHint.toLowerCase().includes(q) ||
-          item.features.some(f => f.toLowerCase().includes(q));
+          item.features.some(f => f.toLowerCase().includes(q)) ||
+          matchModel;
 
         return matchFeat && matchText;
       });
@@ -1069,9 +1102,10 @@ ${lines.join("\n")}
       }
 
       grid.innerHTML = filtered.map(item => {
-        const qtyInCart = getCartItemQty(`${item.id}__`);
+        const currentModel = selectedProtectorModels[item.id] || PHONE_MODEL_GROUPS[0].models[0];
+        const qtyInCart = getCartItemQty(`${item.id}__${currentModel}`);
         return `
-          <div class="rounded-2xl border border-slate-200/90 hover:border-sky-300 bg-white p-4 flex flex-col justify-between gap-3 transition shadow-2xs">
+          <div class="rounded-2xl border border-slate-200/90 hover:border-sky-300 bg-white p-4 flex flex-col justify-between gap-3.5 transition shadow-2xs">
             <div class="space-y-2">
               <div class="flex items-start justify-between gap-2">
                 <div>
@@ -1086,7 +1120,7 @@ ${lines.join("\n")}
                 </div>
               </div>
 
-              <div class="flex flex-wrap gap-1.5 pt-1">
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
                 ${item.features.map(f => `
                   <span class="px-2.5 py-0.5 rounded-lg bg-sky-50 text-sky-700 border border-sky-100 text-[11px] font-bold">${f}</span>
                 `).join("")}
@@ -1094,93 +1128,29 @@ ${lines.join("\n")}
               <p class="text-[11px] text-slate-400">${item.note}</p>
             </div>
 
-            <button
-              onclick="addToCart({ id: '${item.id}', name: '${item.name.replace(/'/g, "\\'")}', unitPrice: ${item.price} })"
-              class="w-full py-2.5 px-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-black text-xs transition flex items-center justify-center gap-1.5 shadow-2xs"
-            >
-              <span>🛒 加入購物車</span>
-              ${qtyInCart > 0 ? `<span class="px-1.5 py-0.5 rounded-full bg-amber-300 text-slate-950 text-[10px] font-black">已選 ${qtyInCart}</span>` : ""}
-            </button>
-          </div>
-        `;
-      }).join("");
-    }
-
-    // 渲染保護貼品牌篩選與機型查詢
-    function renderBrandChips() {
-      const brands = ["全部品牌", ...PHONE_MODEL_CATALOG.map(b => b.brand)];
-      const container = document.getElementById("brandFilterChips");
-      container.innerHTML = brands.map(brand => {
-        const active = selectedBrand === brand;
-        return `
-          <button
-            onclick="selectBrand('${brand.replace(/'/g, "\\'")}')"
-            class="shrink-0 px-3 py-1.5 rounded-xl text-xs font-extrabold border transition ${
-              active
-                ? "bg-blue-700 text-white border-blue-700 shadow-xs"
-                : "bg-slate-50 text-slate-700 border-slate-200 hover:border-sky-300"
-            }"
-          >
-            ${brand}
-          </button>
-        `;
-      }).join("");
-    }
-
-    function selectBrand(brand) {
-      selectedBrand = brand;
-      renderBrandChips();
-      renderPhoneModels();
-    }
-
-    function renderPhoneModels() {
-      const q = (document.getElementById("protectorSearch").value || "").trim().toLowerCase();
-      const container = document.getElementById("phoneModelGroups");
-      const countBadge = document.getElementById("modelMatchCount");
-
-      const groups = PHONE_MODEL_CATALOG
-        .filter(g => selectedBrand === "全部品牌" || g.brand === selectedBrand)
-        .map(g => {
-          const matchedModels = g.models.filter(m => {
-            if (!q) return true;
-            return m.toLowerCase().includes(q) || g.brand.toLowerCase().includes(q);
-          });
-          return { brand: g.brand, models: matchedModels };
-        })
-        .filter(g => g.models.length > 0);
-
-      const totalModels = groups.reduce((acc, g) => acc + g.models.length, 0);
-      countBadge.textContent = `共 ${groups.length} 個品牌 / ${totalModels} 款型號`;
-
-      if (!groups.length) {
-        container.innerHTML = `<div class="col-span-full text-center py-6 text-sm text-slate-500">查無符合「${q}」的機型，可切換品牌或改用 LINE 洽詢。</div>`;
-        return;
-      }
-
-      container.innerHTML = groups.map(g => `
-        <div class="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-2.5">
-          <div class="flex items-center justify-between">
-            <span class="text-xs sm:text-sm font-black text-slate-900">${g.brand}</span>
-            <span class="text-[11px] font-bold text-slate-500">${g.models.length} 款</span>
-          </div>
-          <div class="flex flex-wrap gap-1.5">
-            ${g.models.map(m => `
-              <button
-                onclick="pickModelToNote('${g.brand.replace(/'/g, "\\'")}', '${m.replace(/'/g, "\\'")}')"
-                class="px-2.5 py-1 rounded-lg bg-white hover:bg-sky-600 hover:text-white text-slate-700 border border-slate-200 hover:border-sky-600 text-xs font-medium transition cursor-pointer"
-                title="點擊帶入此型號至訂單備註"
+            <div class="space-y-2 pt-2 border-t border-slate-100">
+              <label for="modelSelect-${item.id}" class="block text-[11px] font-bold text-slate-700">
+                選擇手機 / 平板型號
+              </label>
+              <select
+                id="modelSelect-${item.id}"
+                onchange="onProtectorModelChange('${item.id}', this.value)"
+                class="w-full px-3 py-2 rounded-xl bg-slate-50 hover:bg-sky-50/50 border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 text-xs sm:text-sm font-bold text-slate-800 focus:outline-none transition"
               >
-                ${m}
-              </button>
-            `).join("")}
-          </div>
-        </div>
-      `).join("");
-    }
+                ${buildModelDropdownOptions(currentModel, q)}
+              </select>
 
-    function renderAllProtectorSection() {
-      renderProtectors();
-      renderPhoneModels();
+              <button
+                onclick="addProtectorToCart('${item.id}')"
+                class="w-full py-2.5 px-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-black text-xs transition flex items-center justify-center gap-1.5 shadow-2xs"
+              >
+                <span>🛒 加入購物車</span>
+                ${qtyInCart > 0 ? `<span class="px-1.5 py-0.5 rounded-full bg-amber-300 text-slate-950 text-[10px] font-black">此型號已選 ${qtyInCart}</span>` : ""}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
     }
 
     // 切換 cowhorn 傳輸線長度（1米 $250 / 2米 $350）
@@ -1329,8 +1299,7 @@ ${lines.join("\n")}
 
     // 初始化渲染
     renderFeatureChips();
-    renderBrandChips();
-    renderAllProtectorSection();
+    renderProtectors();
     renderCowhorn();
     renderCategoryTabs();
     renderCatalog();
