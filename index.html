@@ -94,7 +94,7 @@
           <h1 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight drop-shadow">
             彼特到府工作室
             <span class="block text-base sm:text-xl font-bold text-sky-200 mt-1.5">
-              手機貼膜・cowhorn 傳輸線・DEVILCASE 惡魔防摔殼・五匹車架
+              保貼類・傳輸線類・保護殼類・五匹車架配件
             </span>
           </h1>
 
@@ -119,7 +119,7 @@
           </div>
 
           <p class="text-xs sm:text-sm text-sky-100/95 leading-relaxed">
-            攜帶專業工具到府服務，先確認型號與透明報價再施作。預約貼膜享全機清潔服務，可將想挑的保護貼（直接在每款卡片下拉選機型）、cowhorn 傳輸線、DEVILCASE 惡魔防摔殼與五匹車架加入購物車一次加總後傳給彼特。
+            攜帶專業工具到府服務，先確認型號與透明報價再施作。預約貼膜享全機清潔服務，可依下方大類別快速挑選商品加入購物車並計算總金額。
           </p>
         </div>
 
@@ -179,7 +179,7 @@
           🧰
         </div>
         <div class="font-black text-sm sm:text-base text-slate-900">豐富品牌配件</div>
-        <div class="text-xs text-slate-600 mt-1 leading-relaxed">cowhorn 傳輸線、DEVILCASE 惡魔防摔殼、五匹車架等洽詢訂購。</div>
+        <div class="text-xs text-slate-600 mt-1 leading-relaxed">保貼類、傳輸線類、保護殼類、五匹車架配件洽詢訂購。</div>
       </div>
 
       <div class="bg-white rounded-2xl p-4 border border-sky-100 shadow-sm hover:shadow-md hover:border-sky-300 transition">
@@ -191,32 +191,38 @@
       </div>
     </section>
 
-    <!-- 保護貼報價、型號下拉選單與功能篩選區 -->
+    <!-- 大類別切換列（保貼類 / 傳輸線類 / 保護殼類 / 車架配件） -->
+    <nav aria-label="商品大類別" class="bg-white/95 rounded-2xl p-2.5 border border-sky-100 shadow-sm flex items-center gap-2 overflow-x-auto no-scrollbar">
+      <button id="mainCat-all" onclick="setMainCategory('all')" class="main-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition bg-blue-700 text-white shadow-xs">
+        全部商品
+      </button>
+      <button id="mainCat-protector" onclick="setMainCategory('protector')" class="main-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition bg-slate-50 text-slate-700 hover:bg-sky-50 hover:text-sky-700">
+        🛡️ 保貼類
+      </button>
+      <button id="mainCat-cable" onclick="setMainCategory('cable')" class="main-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition bg-slate-50 text-slate-700 hover:bg-sky-50 hover:text-sky-700">
+        🔌 傳輸線類
+      </button>
+      <button id="mainCat-case" onclick="setMainCategory('case')" class="main-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition bg-slate-50 text-slate-700 hover:bg-sky-50 hover:text-sky-700">
+        📱 保護殼類
+      </button>
+      <button id="mainCat-mount" onclick="setMainCategory('mount')" class="main-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition bg-slate-50 text-slate-700 hover:bg-sky-50 hover:text-sky-700">
+        🏍️ 五匹車架/配件
+      </button>
+    </nav>
+
+    <!-- 1. 保貼類 -->
     <section id="protectors" class="bg-white/95 rounded-3xl p-5 sm:p-6 border border-sky-100 shadow-sm space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600">Screen & Lens Protectors</span>
-          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">保護貼報價・型號下拉選單與功能篩選</h2>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600">Category 01・保貼類</span>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">保貼類・報價與型號下拉選單</h2>
         </div>
         <p class="text-xs text-slate-500">在每款保護貼下方下拉選擇手機/平板型號，再點「加入購物車」</p>
       </div>
 
-      <!-- 搜尋與功能標籤列 -->
-      <div class="space-y-3">
-        <div class="relative">
-          <input
-            id="protectorSearch"
-            type="text"
-            oninput="renderProtectors()"
-            placeholder="搜尋機型或款式，例如：iPhone 18、S26 ULTRA、Pixel 11、X300、防窺、鏡頭貼..."
-            class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition"
-          />
-          <span class="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
-        </div>
-
-        <div id="featureFilterChips" class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-          <!-- 由 JS 渲染功能篩選標籤 -->
-        </div>
+      <!-- 功能篩選標籤列 -->
+      <div id="featureFilterChips" class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+        <!-- 由 JS 渲染功能篩選標籤 -->
       </div>
 
       <!-- 保護貼款式卡片列表（每張卡片內含手機型號下拉選單） -->
@@ -225,14 +231,14 @@
       </div>
     </section>
 
-    <!-- cowhorn 傳輸線專區（1米 $250 / 2米 $350 即時切換） -->
+    <!-- 2. 傳輸線類（cowhorn 1米 $250 / 2米 $350 即時切換） -->
     <section id="cowhorn" class="bg-gradient-to-br from-slate-900 via-blue-950 to-sky-900 text-white rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-400/25 space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-sky-400/15 border border-sky-300/30 text-[11px] font-bold text-sky-200 mb-2">
-            <span>🔌 cowhorn 傳輸線專區</span>
+            <span>Category 02・傳輸線類（cowhorn）</span>
           </div>
-          <h2 class="text-xl sm:text-2xl font-black tracking-tight">cowhorn 傳輸線規格切換</h2>
+          <h2 class="text-xl sm:text-2xl font-black tracking-tight">傳輸線類・cowhorn 規格切換</h2>
           <p class="text-xs sm:text-sm text-sky-100/85 mt-1">
             切換 1 米（$250）或 2 米（$350）後點擊「加入購物車」，會自動帶入對應長度與價格。
           </p>
@@ -262,37 +268,36 @@
       </div>
     </section>
 
-    <!-- DEVILCASE 惡魔防摔殼、五匹車架/配件與全站商品目錄 -->
-    <section id="catalog" class="bg-white/95 rounded-3xl p-5 sm:p-6 border border-sky-100 shadow-sm space-y-5">
+    <!-- 3. 保護殼類 -->
+    <section id="cases" class="bg-white/95 rounded-3xl p-5 sm:p-6 border border-sky-100 shadow-sm space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600">DEVILCASE, MWUPP & Accessories Catalog</span>
-          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">DEVILCASE 惡魔防摔殼・五匹車架/配件目錄</h2>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600">Category 03・保護殼類</span>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">保護殼類・DEVILCASE 惡魔防摔殼 / 耳機 / 穿戴殼</h2>
         </div>
         <div class="text-xs text-slate-500">
           點選卡片下方按鈕即可加入購物車自動加總
         </div>
       </div>
 
-      <!-- 分類 Tabs + 關鍵字搜尋 -->
-      <div class="flex flex-col md:flex-row gap-3 md:items-center justify-between">
-        <div id="categoryTabs" class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-          <!-- 由 JS 自動依資料產生分類標籤 -->
+      <div id="caseGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- 由 JS 渲染 -->
+      </div>
+    </section>
+
+    <!-- 4. 五匹車架/配件 -->
+    <section id="mounts" class="bg-white/95 rounded-3xl p-5 sm:p-6 border border-sky-100 shadow-sm space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600">Category 04・五匹車架/配件</span>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">五匹車架/配件・MWUPP 支架與配件</h2>
         </div>
-        <div class="relative md:w-72 shrink-0">
-          <input
-            id="catalogSearch"
-            type="text"
-            oninput="renderCatalog()"
-            placeholder="搜尋防摔殼、五匹車架、縱橫、玄武、甲殼、章魚..."
-            class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition"
-          />
-          <span class="absolute left-3 top-2.5 text-slate-400 text-xs">🔎</span>
+        <div class="text-xs text-slate-500">
+          點選卡片下方按鈕即可加入購物車自動加總
         </div>
       </div>
 
-      <!-- 商品卡片列表 -->
-      <div id="catalogGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div id="mountGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- 由 JS 渲染 -->
       </div>
     </section>
@@ -421,7 +426,7 @@
   </div>
 
   <script>
-    // 1. 保護貼與鏡頭貼報價資料
+    // 1. 保貼類報價資料
     const PROTECTOR_ITEMS = [
       {
         id: "prot-hd-glass",
@@ -470,7 +475,7 @@
       }
     ];
 
-    // 2. 各品牌手機與平板型號清單（已排除老人機，不含容量/顏色/價格）
+    // 2. 各品牌手機與平板型號清單
     const PHONE_MODEL_GROUPS = [
       {
         brand: "iPhone / iPad",
@@ -551,7 +556,7 @@
       }
     ];
 
-    // 3. cowhorn 傳輸線規格（1米 $250 / 2米 $350）
+    // 3. 傳輸線類（cowhorn 1米 $250 / 2米 $350）
     const COWHORN_CABLES = [
       {
         id: "cowhorn-usbc-usbc",
@@ -576,11 +581,11 @@
       }
     ];
 
-    // 4. DEVILCASE 惡魔防摔殼、MWUPP 五匹車架/配件與商品目錄
-    const CATALOG_PRODUCTS = [
+    // 4. 保護殼類
+    const CASE_PRODUCTS = [
       {
         id: "devilcase-ultra-2",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼 ULTRA 2",
         spec: "i15 Pro / i15 Pro Max NT$1,380；i16 系列 NT$1,580（預購）",
@@ -592,7 +597,7 @@
       },
       {
         id: "devilcase-ip16-mag-2",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "IP16 DEVILCASE 惡魔防摔殼標準磁吸版 2",
         spec: "iPhone 16 系列 / 標準磁吸版 2",
@@ -602,7 +607,7 @@
       },
       {
         id: "devilcase-std-mag",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼標準磁吸版",
         spec: "標準磁吸版",
@@ -612,7 +617,7 @@
       },
       {
         id: "devilcase-std-mag-2",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼標準磁吸版 2",
         spec: "標準磁吸版 2",
@@ -622,7 +627,7 @@
       },
       {
         id: "devilcase-std-2",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼標準版 2",
         spec: "標準版 2",
@@ -632,7 +637,7 @@
       },
       {
         id: "devilcase-ultra",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼 ULTRA",
         spec: "ULTRA 系列",
@@ -642,7 +647,7 @@
       },
       {
         id: "devilcase-v3",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼 3",
         spec: "第 3 代",
@@ -652,7 +657,7 @@
       },
       {
         id: "devilcase-pro-2",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼 PRO 2",
         spec: "PRO 2 系列",
@@ -662,7 +667,7 @@
       },
       {
         id: "devilcase-air",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼 AIR",
         spec: "輕薄 AIR 系列",
@@ -672,7 +677,7 @@
       },
       {
         id: "devilcase-airpods-hook",
-        category: "耳機保護殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "惡魔盾 AirPods 保護殼含五金快扣-雙環款（霧面黑）",
         spec: "含五金快扣 / 雙環款 / 霧面黑",
@@ -682,7 +687,7 @@
       },
       {
         id: "devilcase-watch",
-        category: "穿戴保護殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "Apple Watch 惡魔盾保護殼",
         spec: "Apple Watch 適用",
@@ -692,14 +697,18 @@
       },
       {
         id: "devilcase-pro",
-        category: "手機防摔殼",
+        category: "保護殼類",
         brand: "DEVILCASE 惡魔防摔殼",
         name: "DEVILCASE 惡魔防摔殼 PRO",
         spec: "PRO 系列",
         price: 1180,
         status: "現貨/洽詢",
         isNew: false
-      },
+      }
+    ];
+
+    // 5. 五匹車架/配件
+    const MOUNT_PRODUCTS = [
       {
         id: "mwupp-zongheng-shock",
         category: "五匹車架/配件",
@@ -764,17 +773,44 @@
     ];
 
     // 狀態管理
+    let activeMainCategory = "all";
     let selectedFeature = "全部";
     let cableLength = "1m";
-    let selectedCategory = "全部";
-    // 每款保護貼目前下拉選單選到的型號
     const selectedProtectorModels = {};
     PROTECTOR_ITEMS.forEach(p => {
       selectedProtectorModels[p.id] = PHONE_MODEL_GROUPS[0].models[0];
     });
-
-    // 購物車陣列：{ key, id, name, variant, unitPrice, qty, priceNote }
     let cart = [];
+
+    function setMainCategory(cat) {
+      activeMainCategory = cat;
+
+      const map = {
+        all: "mainCat-all",
+        protector: "mainCat-protector",
+        cable: "mainCat-cable",
+        case: "mainCat-case",
+        mount: "mainCat-mount"
+      };
+
+      document.querySelectorAll(".main-cat-btn").forEach(btn => {
+        btn.className = "main-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition bg-slate-50 text-slate-700 hover:bg-sky-50 hover:text-sky-700";
+      });
+      const activeBtn = document.getElementById(map[cat]);
+      if (activeBtn) {
+        activeBtn.className = "main-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition bg-blue-700 text-white shadow-xs";
+      }
+
+      const secProt = document.getElementById("protectors");
+      const secCable = document.getElementById("cowhorn");
+      const secCase = document.getElementById("cases");
+      const secMount = document.getElementById("mounts");
+
+      secProt.classList.toggle("hidden", !(cat === "all" || cat === "protector"));
+      secCable.classList.toggle("hidden", !(cat === "all" || cat === "cable"));
+      secCase.classList.toggle("hidden", !(cat === "all" || cat === "case"));
+      secMount.classList.toggle("hidden", !(cat === "all" || cat === "mount"));
+    }
 
     function showToast(msg) {
       const toast = document.getElementById("toast");
@@ -815,7 +851,8 @@
       renderCartUI();
       renderProtectors();
       renderCowhorn();
-      renderCatalog();
+      renderProductCards("caseGrid", CASE_PRODUCTS);
+      renderProductCards("mountGrid", MOUNT_PRODUCTS);
       showToast(`已加入購物車：${name}${variant ? `（${variant}）` : ""}`);
     }
 
@@ -848,7 +885,8 @@
       renderCartUI();
       renderProtectors();
       renderCowhorn();
-      renderCatalog();
+      renderProductCards("caseGrid", CASE_PRODUCTS);
+      renderProductCards("mountGrid", MOUNT_PRODUCTS);
     }
 
     function removeCartItem(key) {
@@ -856,7 +894,8 @@
       renderCartUI();
       renderProtectors();
       renderCowhorn();
-      renderCatalog();
+      renderProductCards("caseGrid", CASE_PRODUCTS);
+      renderProductCards("mountGrid", MOUNT_PRODUCTS);
     }
 
     function clearCart() {
@@ -864,7 +903,8 @@
       renderCartUI();
       renderProtectors();
       renderCowhorn();
-      renderCatalog();
+      renderProductCards("caseGrid", CASE_PRODUCTS);
+      renderProductCards("mountGrid", MOUNT_PRODUCTS);
       showToast("已清空購物車");
     }
 
@@ -932,7 +972,7 @@ ${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
             <div class="text-center py-10 space-y-2">
               <div class="text-3xl">🛒</div>
               <div class="text-sm font-bold text-slate-700">購物車目前還沒有商品</div>
-              <p class="text-xs text-slate-500">在保護貼選擇型號並點「加入購物車」，或挑選傳輸線/防摔殼/五匹車架，即可自動加總金額。</p>
+              <p class="text-xs text-slate-500">在各分類卡片下方點「加入購物車」，即可自動加總金額。</p>
             </div>
           `;
         } else {
@@ -1004,46 +1044,21 @@ ${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
       }
     }
 
-    // 產生每張保護貼卡片內的品牌分組下拉選單 <option>
-    function buildModelDropdownOptions(selectedValue, searchQuery) {
-      const q = (searchQuery || "").trim().toLowerCase();
+    function buildModelDropdownOptions(selectedValue) {
       const optionsHtml = [];
-      let matchedAny = false;
-
       PHONE_MODEL_GROUPS.forEach(group => {
-        const filteredModels = group.models.filter(m => {
-          if (!q) return true;
-          return m.toLowerCase().includes(q) || group.brand.toLowerCase().includes(q);
+        optionsHtml.push(`<optgroup label="${group.brand}">`);
+        group.models.forEach(model => {
+          const isSel = selectedValue === model ? "selected" : "";
+          optionsHtml.push(`<option value="${model.replace(/"/g, "&quot;")}" ${isSel}>${model}</option>`);
         });
-        if (filteredModels.length > 0) {
-          matchedAny = true;
-          optionsHtml.push(`<optgroup label="${group.brand}">`);
-          filteredModels.forEach(model => {
-            const isSel = selectedValue === model ? "selected" : "";
-            optionsHtml.push(`<option value="${model.replace(/"/g, "&quot;")}" ${isSel}>${model}</option>`);
-          });
-          optionsHtml.push(`</optgroup>`);
-        }
+        optionsHtml.push(`</optgroup>`);
       });
-
-      if (!matchedAny) {
-        PHONE_MODEL_GROUPS.forEach(group => {
-          optionsHtml.push(`<optgroup label="${group.brand}">`);
-          group.models.forEach(model => {
-            const isSel = selectedValue === model ? "selected" : "";
-            optionsHtml.push(`<option value="${model.replace(/"/g, "&quot;")}" ${isSel}>${model}</option>`);
-          });
-          optionsHtml.push(`</optgroup>`);
-        });
-      }
-
       const unspecSel = selectedValue === "未指定型號（待確認）" ? "selected" : "";
       optionsHtml.push(`<optgroup label="其他"><option value="未指定型號（待確認）" ${unspecSel}>未指定型號（待確認）</option></optgroup>`);
-
       return optionsHtml.join("");
     }
 
-    // 渲染保護貼功能篩選標籤
     function renderFeatureChips() {
       const featureSet = new Set(["全部", "新品上架"]);
       PROTECTOR_ITEMS.forEach(item => item.features.forEach(f => featureSet.add(f)));
@@ -1072,35 +1087,16 @@ ${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
       renderProtectors();
     }
 
-    // 渲染保護貼款式卡片（每張卡片內嵌手機型號下拉式選單 + 加入購物車按鈕）
     function renderProtectors() {
-      const q = (document.getElementById("protectorSearch").value || "").trim().toLowerCase();
       const filtered = PROTECTOR_ITEMS.filter(item => {
-        const matchFeat =
+        return (
           selectedFeature === "全部" ||
           (selectedFeature === "新品上架" && item.isNew) ||
-          item.features.includes(selectedFeature);
-
-        const matchModel = PHONE_MODEL_GROUPS.some(g =>
-          g.models.some(m => m.toLowerCase().includes(q) || g.brand.toLowerCase().includes(q))
+          item.features.includes(selectedFeature)
         );
-
-        const matchText =
-          !q ||
-          item.name.toLowerCase().includes(q) ||
-          item.modelHint.toLowerCase().includes(q) ||
-          item.features.some(f => f.toLowerCase().includes(q)) ||
-          matchModel;
-
-        return matchFeat && matchText;
       });
 
       const grid = document.getElementById("protectorGrid");
-      if (!filtered.length) {
-        grid.innerHTML = `<div class="col-span-full text-center py-6 text-sm text-slate-500">找不到符合條件的保護貼款式，請換個關鍵字或點選「全部」。</div>`;
-        return;
-      }
-
       grid.innerHTML = filtered.map(item => {
         const currentModel = selectedProtectorModels[item.id] || PHONE_MODEL_GROUPS[0].models[0];
         const qtyInCart = getCartItemQty(`${item.id}__${currentModel}`);
@@ -1137,7 +1133,7 @@ ${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
                 onchange="onProtectorModelChange('${item.id}', this.value)"
                 class="w-full px-3 py-2 rounded-xl bg-slate-50 hover:bg-sky-50/50 border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30 text-xs sm:text-sm font-bold text-slate-800 focus:outline-none transition"
               >
-                ${buildModelDropdownOptions(currentModel, q)}
+                ${buildModelDropdownOptions(currentModel)}
               </select>
 
               <button
@@ -1153,7 +1149,6 @@ ${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
       }).join("");
     }
 
-    // 切換 cowhorn 傳輸線長度（1米 $250 / 2米 $350）
     function setCableLength(len) {
       cableLength = len;
       const btn1m = document.getElementById("lenBtn1m");
@@ -1204,66 +1199,10 @@ ${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
       }).join("");
     }
 
-    // 分類與商品目錄自動連動
-    function renderCategoryTabs() {
-      const hasNew = CATALOG_PRODUCTS.some(p => p.isNew);
-      const cats = ["全部"];
-      if (hasNew) cats.push("新品");
-      CATALOG_PRODUCTS.forEach(p => {
-        if (!cats.includes(p.category)) cats.push(p.category);
-      });
-
-      if (!cats.includes(selectedCategory)) selectedCategory = "全部";
-
-      const tabsEl = document.getElementById("categoryTabs");
-      tabsEl.innerHTML = cats.map(cat => {
-        const active = selectedCategory === cat;
-        return `
-          <button
-            onclick="selectCategory('${cat.replace(/'/g, "\\'")}')"
-            class="shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-extrabold border transition ${
-              active
-                ? "bg-blue-700 text-white border-blue-700 shadow-xs"
-                : "bg-slate-50 text-slate-700 border-slate-200 hover:border-sky-300"
-            }"
-          >
-            ${cat}
-          </button>
-        `;
-      }).join("");
-    }
-
-    function selectCategory(cat) {
-      selectedCategory = cat;
-      renderCategoryTabs();
-      renderCatalog();
-    }
-
-    function renderCatalog() {
-      const q = (document.getElementById("catalogSearch").value || "").trim().toLowerCase();
-      const filtered = CATALOG_PRODUCTS.filter(p => {
-        const matchCat =
-          selectedCategory === "全部" ||
-          (selectedCategory === "新品" && p.isNew) ||
-          p.category === selectedCategory;
-
-        const matchText =
-          !q ||
-          p.name.toLowerCase().includes(q) ||
-          p.spec.toLowerCase().includes(q) ||
-          p.brand.toLowerCase().includes(q) ||
-          p.category.toLowerCase().includes(q);
-
-        return matchCat && matchText;
-      });
-
-      const grid = document.getElementById("catalogGrid");
-      if (!filtered.length) {
-        grid.innerHTML = `<div class="col-span-full text-center py-8 text-sm text-slate-500">目前沒有符合搜尋條件的商品，可切換分類或清除關鍵字。</div>`;
-        return;
-      }
-
-      grid.innerHTML = filtered.map(p => {
+    function renderProductCards(targetId, items) {
+      const grid = document.getElementById(targetId);
+      if (!grid) return;
+      grid.innerHTML = items.map(p => {
         const displayPrice = p.priceLabel ? p.priceLabel : `NT$${p.price.toLocaleString()}`;
         const qtyInCart = getCartItemQty(`${p.id}__`);
         const priceNote = p.priceLabel ? p.priceLabel : "";
@@ -1271,7 +1210,7 @@ ${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
           <div class="rounded-2xl border border-slate-200/90 hover:border-sky-300 bg-white p-4 flex flex-col justify-between gap-3 transition shadow-2xs">
             <div class="space-y-1.5">
               <div class="flex items-center justify-between gap-2">
-                <span class="px-2 py-0.5 rounded-md bg-sky-50 text-sky-700 border border-sky-100 text-[11px] font-bold">${p.category}</span>
+                <span class="px-2 py-0.5 rounded-md bg-sky-50 text-sky-700 border border-sky-100 text-[11px] font-bold">${p.brand}</span>
                 <div class="flex items-center gap-1.5">
                   ${p.isNew ? `<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black">新品</span>` : ""}
                   <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold">${p.status || "洽詢"}</span>
@@ -1301,8 +1240,8 @@ ${note ? `• 補充備註：${note}\n` : ""}• 地點與時間：${area}
     renderFeatureChips();
     renderProtectors();
     renderCowhorn();
-    renderCategoryTabs();
-    renderCatalog();
+    renderProductCards("caseGrid", CASE_PRODUCTS);
+    renderProductCards("mountGrid", MOUNT_PRODUCTS);
     renderCartUI();
   </script>
 </body>
