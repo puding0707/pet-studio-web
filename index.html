@@ -40,7 +40,7 @@
     }
   </style>
 </head>
-<body class="pb-28">
+<body class="pb-32">
   <!-- 頂部導覽列 -->
   <header class="sticky top-0 z-30 backdrop-blur-md bg-white/80 border-b border-sky-100">
     <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
@@ -55,8 +55,9 @@
           <div class="text-[11px] text-slate-500 mt-0.5">大台中到府服務・安心保固・快速預約</div>
         </div>
       </a>
-      <button onclick="openBookingModal('一般諮詢 / 到府預約')" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-700 to-sky-500 text-white text-xs sm:text-sm font-bold shadow-sm hover:opacity-95 active:scale-95 transition">
-        LINE 預約
+      <button onclick="openCartDrawer()" class="relative px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-700 to-sky-500 text-white text-xs sm:text-sm font-bold shadow-sm hover:opacity-95 active:scale-95 transition flex items-center gap-1.5">
+        <span>🛒 購物車</span>
+        <span id="headerCartBadge" class="px-1.5 py-0.2 rounded-full bg-white text-blue-800 text-[11px] font-black">0</span>
       </button>
     </div>
   </header>
@@ -118,7 +119,7 @@
           </div>
 
           <p class="text-xs sm:text-sm text-sky-100/95 leading-relaxed">
-            攜帶專業工具到府服務，先確認型號與透明報價再施作。預約貼膜享全機清潔服務，亦可搭配 cowhorn 傳輸線、DEVILCASE 惡魔防摔殼與 MWUPP 五匹車架/配件一併預約。
+            攜帶專業工具到府服務，先確認型號與透明報價再施作。預約貼膜享全機清潔服務，可將想挑的保護貼、cowhorn 傳輸線、DEVILCASE 惡魔防摔殼與五匹車架加入購物車一次加總後傳給彼特。
           </p>
         </div>
 
@@ -132,11 +133,11 @@
           </div>
           <div class="text-lg font-black tracking-wide text-white">@wks8271u</div>
           <p class="text-xs text-sky-100/90 leading-relaxed">
-            提供到府服務、專業技術與安心保固。點擊下方按鈕即可帶入已選品項並一鍵複製預約訊息。
+            把想要的商品加入購物車並自動算好總金額，一鍵複製或開啟 LINE 即可直接傳送。
           </p>
           <div class="flex gap-2 pt-1">
-            <button onclick="openBookingModal('快速預約到府 / 詢價')" class="flex-1 py-2.5 px-3 rounded-xl bg-white text-blue-900 font-black text-xs sm:text-sm hover:bg-sky-50 transition shadow">
-              立即預約 / 詢價
+            <button onclick="openCartDrawer()" class="flex-1 py-2.5 px-3 rounded-xl bg-white text-blue-900 font-black text-xs sm:text-sm hover:bg-sky-50 transition shadow">
+              查看購物車總計
             </button>
             <button onclick="copyLineId()" class="py-2.5 px-3 rounded-xl bg-sky-950/60 hover:bg-sky-950/80 text-white border border-white/25 font-bold text-xs transition">
               複製 ID
@@ -197,7 +198,7 @@
           <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600">Screen & Lens Protectors</span>
           <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">保護貼型號查詢・報價與功能篩選</h2>
         </div>
-        <p class="text-xs text-slate-500">可依機型/品牌搜尋、切換品牌機型清單或依功能標籤比對</p>
+        <p class="text-xs text-slate-500">點選款式加入購物車，也可點選下方型號把機型帶入訂單備註</p>
       </div>
 
       <!-- 搜尋與功能標籤列 -->
@@ -228,7 +229,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <h3 class="text-base sm:text-lg font-black text-slate-900">手機與平板型號查詢（依品牌分類）</h3>
-            <p class="text-xs text-slate-500">點選任一型號可直接帶入 LINE 預約詢問貼膜與配件</p>
+            <p class="text-xs text-slate-500">點選任一型號可直接帶入購物車備註型號</p>
           </div>
           <span id="modelMatchCount" class="text-xs font-bold text-sky-700 bg-sky-50 px-3 py-1 rounded-full self-start sm:self-auto">
             <!-- 由 JS 顯示筆數 -->
@@ -254,7 +255,7 @@
           </div>
           <h2 class="text-xl sm:text-2xl font-black tracking-tight">cowhorn 傳輸線規格切換</h2>
           <p class="text-xs sm:text-sm text-sky-100/85 mt-1">
-            一鍵切換 1 米（$250）與 2 米（$350）價格，支援到府一併帶去或線上預約。
+            切換 1 米（$250）或 2 米（$350）後點擊「加入購物車」，會自動帶入對應長度與價格。
           </p>
         </div>
 
@@ -282,7 +283,7 @@
       </div>
     </section>
 
-    <!-- DEVILCASE 惡魔防摔殼、五匹車架/配件與全站商品目錄（含新品與新分類自動連動） -->
+    <!-- DEVILCASE 惡魔防摔殼、五匹車架/配件與全站商品目錄 -->
     <section id="catalog" class="bg-white/95 rounded-3xl p-5 sm:p-6 border border-sky-100 shadow-sm space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
@@ -290,7 +291,7 @@
           <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">DEVILCASE 惡魔防摔殼・五匹車架/配件目錄</h2>
         </div>
         <div class="text-xs text-slate-500">
-          已整合 DEVILCASE 與 MWUPP 五匹車架/配件・支援新品與新分類自動連動
+          點選卡片下方按鈕即可加入購物車自動加總
         </div>
       </div>
 
@@ -316,75 +317,121 @@
         <!-- 由 JS 渲染 -->
       </div>
     </section>
-
-    <!-- 預約與聯絡說明 -->
-    <section class="bg-gradient-to-r from-sky-50 via-white to-blue-50 rounded-3xl p-5 sm:p-6 border border-sky-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div class="space-y-1">
-        <div class="text-base sm:text-lg font-black text-slate-900">彼特通訊工作室（彼特到府工作室）</div>
-        <p class="text-xs sm:text-sm text-slate-600">
-          大台中到府服務・安心保固・快速預約｜官方 LINE：<span class="font-bold text-blue-700">@wks8271u</span>
-        </p>
-      </div>
-      <div class="flex flex-wrap gap-2.5 w-full sm:w-auto">
-        <button onclick="openBookingModal('到府服務預約')" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs sm:text-sm transition shadow-sm">
-          產生 LINE 預約文字
-        </button>
-        <button onclick="copyLineId()" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold text-xs sm:text-sm transition">
-          複製 @wks8271u
-        </button>
-      </div>
-    </section>
   </main>
 
-  <!-- 底部固定快速預約列 -->
-  <div class="fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-sky-100 shadow-lg">
-    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
-      <div class="min-w-0">
-        <div class="text-xs font-black text-slate-900 truncate">彼特到府工作室｜LINE：@wks8271u</div>
-        <div class="text-[11px] text-slate-500 truncate">大台中到府服務・預約貼膜享全機清潔</div>
-      </div>
-      <button onclick="openBookingModal('底部快速預約')" class="shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-700 to-sky-500 text-white text-xs sm:text-sm font-black shadow hover:opacity-95 active:scale-95 transition">
-        一鍵預約 / 詢價
+  <!-- 底部固定購物車總計列 -->
+  <div class="fixed bottom-0 inset-x-0 z-30 bg-slate-900/95 backdrop-blur-md text-white border-t border-sky-400/25 shadow-2xl">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <button onclick="openCartDrawer()" class="flex items-center gap-3 text-left min-w-0 group">
+        <div class="relative w-10 h-10 rounded-xl bg-sky-500/20 border border-sky-300/30 flex items-center justify-center text-lg shrink-0">
+          🛒
+          <span id="bottomCartQty" class="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1 rounded-full bg-amber-300 text-slate-950 text-[11px] font-black flex items-center justify-center">
+            0
+          </span>
+        </div>
+        <div class="min-w-0">
+          <div class="text-[11px] text-sky-200 font-bold truncate group-hover:underline">
+            點此查看已選明細（<span id="bottomCartSummary">尚未挑選商品</span>）
+          </div>
+          <div class="text-base sm:text-lg font-black text-white leading-tight">
+            總金額：<span id="bottomCartTotal" class="text-sky-300">NT$0</span>
+          </div>
+        </div>
       </button>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button
+          onclick="quickCopyOrder()"
+          class="px-3.5 py-2.5 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 text-xs sm:text-sm font-black shadow transition active:scale-95"
+        >
+          一鍵複製訂單
+        </button>
+        <a
+          href="https://line.me/R/ti/p/@wks8271u"
+          target="_blank"
+          rel="noopener noreferrer"
+          onclick="copyOrderSilentlyIfNotEmpty()"
+          class="px-3.5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-xs sm:text-sm font-black shadow transition active:scale-95 flex items-center gap-1"
+        >
+          <span>傳給彼特</span>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- 預約與複製訊息 Modal -->
-  <div id="bookingModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-sky-100 space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-black text-slate-900">LINE 預約 / 詢價訊息</h3>
-        <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center">
+  <!-- 購物車明細與一鍵傳送抽屜/彈窗 -->
+  <div id="cartModal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-slate-950/65 backdrop-blur-xs p-0 sm:p-4">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-lg w-full max-h-[90vh] flex flex-col shadow-2xl border border-sky-100 overflow-hidden">
+      <!-- 標題列 -->
+      <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-sky-50/60">
+        <div>
+          <h3 class="text-lg font-black text-slate-900">已選商品購物車</h3>
+          <p class="text-xs text-slate-500">可增減數量、填寫機型/地區後一鍵複製或傳送至 LINE（@wks8271u）</p>
+        </div>
+        <button onclick="closeCartDrawer()" class="w-8 h-8 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 font-bold flex items-center justify-center">
           ✕
         </button>
       </div>
 
-      <p class="text-xs text-slate-500">
-        官方 LINE ID：<span class="font-bold text-blue-700">@wks8271u</span>。可編輯下方預約內容後一鍵複製，再貼到 LINE 傳送給彼特。
-      </p>
-
-      <div class="space-y-3">
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">您的手機型號 / 需求項目</label>
-          <input id="bookingItemInput" type="text" oninput="updateBookingPreview()" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">方便的時間 / 大台中地區</label>
-          <input id="bookingAreaInput" type="text" value="大台中地區 / 平日晚間或假日可約" oninput="updateBookingPreview()" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">LINE 傳送文案預覽</label>
-          <textarea id="bookingPreview" rows="5" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed focus:outline-none"></textarea>
-        </div>
+      <!-- 商品明細列表 -->
+      <div id="cartItemsContainer" class="p-5 overflow-y-auto space-y-3 flex-1">
+        <!-- 由 JS 渲染 -->
       </div>
 
-      <div class="flex gap-2.5 pt-1">
-        <button onclick="copyBookingMessage()" class="flex-1 py-2.5 px-4 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-black text-sm transition">
-          複製預約文案
-        </button>
-        <a href="https://line.me/R/ti/p/@wks8271u" target="_blank" rel="noopener noreferrer" class="py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-sm transition flex items-center justify-center">
-          開啟 LINE
-        </a>
+      <!-- 填寫備註與一鍵傳送區 -->
+      <div class="px-5 py-4 border-t border-slate-100 bg-slate-50/80 space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">手機型號 / 備註</label>
+            <input
+              id="orderDeviceNote"
+              type="text"
+              oninput="updateOrderPreview()"
+              placeholder="例如：iPhone 18 Pro / S26 ULTRA"
+              class="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+            />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">大台中地區 / 方便時間</label>
+            <input
+              id="orderAreaNote"
+              type="text"
+              value="大台中地區 / 平日晚間或假日可約"
+              oninput="updateOrderPreview()"
+              class="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+            />
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <button onclick="clearCart()" class="text-xs font-bold text-rose-600 hover:underline">
+            清空購物車
+          </button>
+          <div class="text-right">
+            <span class="text-xs text-slate-500 mr-1">購物車總金額</span>
+            <span id="modalCartTotal" class="text-xl font-black text-blue-700">NT$0</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">LINE 訂單摘要預覽</label>
+          <textarea id="orderMessagePreview" rows="5" class="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 leading-relaxed focus:outline-none"></textarea>
+        </div>
+
+        <div class="flex gap-2.5 pt-1">
+          <button onclick="copyOrderText()" class="flex-1 py-2.5 px-4 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-black text-xs sm:text-sm transition shadow-xs">
+            一鍵複製訂單
+          </button>
+          <a
+            href="https://line.me/R/ti/p/@wks8271u"
+            target="_blank"
+            rel="noopener noreferrer"
+            onclick="copyOrderSilentlyIfNotEmpty()"
+            class="flex-1 py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs sm:text-sm transition shadow-xs flex items-center justify-center"
+          >
+            開啟 LINE 傳送
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -395,7 +442,7 @@
   </div>
 
   <script>
-    // 1. 保護貼與鏡頭貼報價資料（可依實際販售型號與價格隨時修改）
+    // 1. 保護貼與鏡頭貼報價資料
     const PROTECTOR_ITEMS = [
       {
         id: "prot-hd-glass",
@@ -550,7 +597,7 @@
       }
     ];
 
-    // 4. DEVILCASE 惡魔防摔殼、MWUPP 五匹車架/配件與商品目錄（可新增新品或新 category，畫面會自動連動）
+    // 4. DEVILCASE 惡魔防摔殼、MWUPP 五匹車架/配件與商品目錄
     const CATALOG_PRODUCTS = [
       {
         id: "devilcase-ultra-2",
@@ -742,6 +789,8 @@
     let selectedBrand = "全部品牌";
     let cableLength = "1m";
     let selectedCategory = "全部";
+    // 購物車陣列：{ key, id, name, variant, unitPrice, qty, priceNote }
+    let cart = [];
 
     function showToast(msg) {
       const toast = document.getElementById("toast");
@@ -750,7 +799,7 @@
       clearTimeout(window.__toastTimer);
       window.__toastTimer = setTimeout(() => {
         toast.classList.add("hidden");
-      }, 2200);
+      }, 2300);
     }
 
     function copyLineId() {
@@ -758,34 +807,212 @@
       showToast("已複製官方 LINE ID：@wks8271u");
     }
 
-    function openBookingModal(defaultItemText) {
-      const modal = document.getElementById("bookingModal");
-      document.getElementById("bookingItemInput").value = defaultItemText || "";
-      updateBookingPreview();
+    function getCartItemQty(key) {
+      const found = cart.find(i => i.key === key);
+      return found ? found.qty : 0;
+    }
+
+    function addToCart({ id, name, variant = "", unitPrice, priceNote = "" }) {
+      const key = `${id}__${variant}`;
+      const existing = cart.find(i => i.key === key);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          key,
+          id,
+          name,
+          variant,
+          unitPrice: Number(unitPrice) || 0,
+          qty: 1,
+          priceNote
+        });
+      }
+      renderCartUI();
+      renderProtectors();
+      renderCowhorn();
+      renderCatalog();
+      showToast(`已加入購物車：${name}${variant ? `（${variant}）` : ""}`);
+    }
+
+    function changeCartQty(key, delta) {
+      const idx = cart.findIndex(i => i.key === key);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) {
+        cart.splice(idx, 1);
+      }
+      renderCartUI();
+      renderProtectors();
+      renderCowhorn();
+      renderCatalog();
+    }
+
+    function removeCartItem(key) {
+      cart = cart.filter(i => i.key !== key);
+      renderCartUI();
+      renderProtectors();
+      renderCowhorn();
+      renderCatalog();
+    }
+
+    function clearCart() {
+      cart = [];
+      renderCartUI();
+      renderProtectors();
+      renderCowhorn();
+      renderCatalog();
+      showToast("已清空購物車");
+    }
+
+    function getCartTotals() {
+      const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+      const totalAmount = cart.reduce((sum, i) => sum + i.unitPrice * i.qty, 0);
+      return { totalQty, totalAmount };
+    }
+
+    function buildOrderMessage() {
+      const device = (document.getElementById("orderDeviceNote")?.value || "").trim() || "未填寫";
+      const area = (document.getElementById("orderAreaNote")?.value || "").trim() || "大台中地區";
+      const { totalQty, totalAmount } = getCartTotals();
+
+      if (!cart.length) {
+        return `您好，想向「彼特到府工作室 / 彼特通訊工作室」預約與詢價：
+• 手機型號 / 備註：${device}
+• 地點與時間：${area}
+麻煩協助確認報價與可約時段，謝謝！`;
+      }
+
+      const lines = cart.map((item, idx) => {
+        const sub = item.unitPrice * item.qty;
+        const varText = item.variant ? ` [${item.variant}]` : "";
+        const noteText = item.priceNote ? `（${item.priceNote}）` : "";
+        return `${idx + 1}. ${item.name}${varText} x${item.qty} = NT$${sub.toLocaleString()}${noteText}`;
+      });
+
+      return `您好，想向「彼特到府工作室 / 彼特通訊工作室」下單/預約：
+${lines.join("\n")}
+----------------------
+合計件數：${totalQty} 件
+購物車總金額：NT$${totalAmount.toLocaleString()}
+• 手機型號 / 備註：${device}
+• 地點與時間：${area}
+（實際成交金額依現場型號/款式確認為準，謝謝！）`;
+    }
+
+    function updateOrderPreview() {
+      const preview = document.getElementById("orderMessagePreview");
+      if (preview) {
+        preview.value = buildOrderMessage();
+      }
+    }
+
+    function renderCartUI() {
+      const { totalQty, totalAmount } = getCartTotals();
+      const headerBadge = document.getElementById("headerCartBadge");
+      const bottomQty = document.getElementById("bottomCartQty");
+      const bottomSummary = document.getElementById("bottomCartSummary");
+      const bottomTotal = document.getElementById("bottomCartTotal");
+      const modalTotal = document.getElementById("modalCartTotal");
+      const container = document.getElementById("cartItemsContainer");
+
+      if (headerBadge) headerBadge.textContent = totalQty;
+      if (bottomQty) bottomQty.textContent = totalQty;
+      if (bottomSummary) {
+        bottomSummary.textContent = totalQty > 0 ? `已選 ${totalQty} 件商品` : "尚未挑選商品";
+      }
+      if (bottomTotal) bottomTotal.textContent = `NT$${totalAmount.toLocaleString()}`;
+      if (modalTotal) modalTotal.textContent = `NT$${totalAmount.toLocaleString()}`;
+
+      if (container) {
+        if (!cart.length) {
+          container.innerHTML = `
+            <div class="text-center py-10 space-y-2">
+              <div class="text-3xl">🛒</div>
+              <div class="text-sm font-bold text-slate-700">購物車目前還沒有商品</div>
+              <p class="text-xs text-slate-500">在保護貼、cowhorn 傳輸線或商品目錄卡片下方點「加入購物車」，即可自動加總金額。</p>
+            </div>
+          `;
+        } else {
+          container.innerHTML = cart.map(item => {
+            const subtotal = item.unitPrice * item.qty;
+            return `
+              <div class="rounded-2xl border border-slate-200 bg-white p-3.5 flex items-center justify-between gap-3">
+                <div class="min-w-0 flex-1">
+                  <div class="font-black text-xs sm:text-sm text-slate-900 truncate">${item.name}</div>
+                  <div class="text-[11px] text-slate-500 mt-0.5 flex flex-wrap gap-1.5">
+                    ${item.variant ? `<span class="px-1.5 py-0.5 rounded bg-sky-50 text-sky-700 font-bold">${item.variant}</span>` : ""}
+                    <span>單價 NT$${item.unitPrice.toLocaleString()}</span>
+                    ${item.priceNote ? `<span class="text-amber-700">・${item.priceNote}</span>` : ""}
+                  </div>
+                  <div class="text-xs font-black text-blue-700 mt-1">小計：NT$${subtotal.toLocaleString()}</div>
+                </div>
+
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button onclick="changeCartQty('${item.key.replace(/'/g, "\\'")}', -1)" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-black text-sm flex items-center justify-center">-</button>
+                  <span class="w-6 text-center text-xs font-black text-slate-900">${item.qty}</span>
+                  <button onclick="changeCartQty('${item.key.replace(/'/g, "\\'")}', 1)" class="w-7 h-7 rounded-lg bg-sky-100 hover:bg-sky-200 text-sky-900 font-black text-sm flex items-center justify-center">+</button>
+                  <button onclick="removeCartItem('${item.key.replace(/'/g, "\\'")}')" class="ml-1 w-7 h-7 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs flex items-center justify-center" title="移除">✕</button>
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
+      }
+
+      updateOrderPreview();
+    }
+
+    function openCartDrawer() {
+      renderCartUI();
+      const modal = document.getElementById("cartModal");
       modal.classList.remove("hidden");
       modal.classList.add("flex");
     }
 
-    function closeBookingModal() {
-      const modal = document.getElementById("bookingModal");
+    function closeCartDrawer() {
+      const modal = document.getElementById("cartModal");
       modal.classList.add("hidden");
       modal.classList.remove("flex");
     }
 
-    function updateBookingPreview() {
-      const item = document.getElementById("bookingItemInput").value.trim() || "配件 / 貼膜諮詢";
-      const area = document.getElementById("bookingAreaInput").value.trim() || "大台中地區";
-      document.getElementById("bookingPreview").value =
-`您好，想向「彼特到府工作室 / 彼特通訊工作室」預約與詢價：
-• 需求項目：${item}
-• 地點與時間：${area}
-麻煩協助確認報價與可約時段，謝謝！`;
+    function copyOrderText() {
+      const msg = buildOrderMessage();
+      const preview = document.getElementById("orderMessagePreview");
+      if (preview) preview.value = msg;
+      navigator.clipboard?.writeText(msg);
+      showToast("已一鍵複製訂單與總金額，可直接貼到 LINE（@wks8271u）");
     }
 
-    function copyBookingMessage() {
-      const text = document.getElementById("bookingPreview").value;
-      navigator.clipboard?.writeText(text);
-      showToast("已複製 LINE 預約文案，可直接貼上 @wks8271u");
+    function quickCopyOrder() {
+      if (!cart.length) {
+        openCartDrawer();
+        showToast("先挑幾樣商品加入購物車，即可自動算總金額");
+        return;
+      }
+      copyOrderText();
+      openCartDrawer();
+    }
+
+    function copyOrderSilentlyIfNotEmpty() {
+      if (cart.length > 0) {
+        const msg = buildOrderMessage();
+        navigator.clipboard?.writeText(msg);
+        showToast("已自動複製訂單文案，開啟 LINE 後直接貼上即可傳送");
+      }
+    }
+
+    function pickModelToNote(brand, model) {
+      const input = document.getElementById("orderDeviceNote");
+      const current = (input?.value || "").trim();
+      const tag = `${brand} - ${model}`;
+      if (!current) {
+        input.value = tag;
+      } else if (!current.includes(model)) {
+        input.value = `${current}、${model}`;
+      }
+      updateOrderPreview();
+      showToast(`已帶入機型：${tag}`);
     }
 
     // 渲染保護貼功能篩選標籤
@@ -817,7 +1044,7 @@
       renderProtectors();
     }
 
-    // 渲染保護貼款式卡片
+    // 渲染保護貼款式卡片（按鈕改為加入購物車）
     function renderProtectors() {
       const q = (document.getElementById("protectorSearch").value || "").trim().toLowerCase();
       const filtered = PROTECTOR_ITEMS.filter(item => {
@@ -841,38 +1068,42 @@
         return;
       }
 
-      grid.innerHTML = filtered.map(item => `
-        <div class="rounded-2xl border border-slate-200/90 hover:border-sky-300 bg-white p-4 flex flex-col justify-between gap-3 transition shadow-2xs">
-          <div class="space-y-2">
-            <div class="flex items-start justify-between gap-2">
-              <div>
-                <div class="flex items-center gap-2 flex-wrap">
-                  <h3 class="font-black text-base text-slate-900">${item.name}</h3>
-                  ${item.isNew ? `<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black">NEW 新品</span>` : ""}
+      grid.innerHTML = filtered.map(item => {
+        const qtyInCart = getCartItemQty(`${item.id}__`);
+        return `
+          <div class="rounded-2xl border border-slate-200/90 hover:border-sky-300 bg-white p-4 flex flex-col justify-between gap-3 transition shadow-2xs">
+            <div class="space-y-2">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <h3 class="font-black text-base text-slate-900">${item.name}</h3>
+                    ${item.isNew ? `<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black">NEW 新品</span>` : ""}
+                  </div>
+                  <p class="text-xs text-slate-500 mt-0.5">${item.modelHint}</p>
                 </div>
-                <p class="text-xs text-slate-500 mt-0.5">${item.modelHint}</p>
+                <div class="text-right shrink-0">
+                  <span class="text-lg font-black text-blue-700">$${item.price}</span>
+                </div>
               </div>
-              <div class="text-right shrink-0">
-                <span class="text-lg font-black text-blue-700">$${item.price}</span>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                ${item.features.map(f => `
+                  <span class="px-2.5 py-0.5 rounded-lg bg-sky-50 text-sky-700 border border-sky-100 text-[11px] font-bold">${f}</span>
+                `).join("")}
               </div>
+              <p class="text-[11px] text-slate-400">${item.note}</p>
             </div>
 
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              ${item.features.map(f => `
-                <span class="px-2.5 py-0.5 rounded-lg bg-sky-50 text-sky-700 border border-sky-100 text-[11px] font-bold">${f}</span>
-              `).join("")}
-            </div>
-            <p class="text-[11px] text-slate-400">${item.note}</p>
+            <button
+              onclick="addToCart({ id: '${item.id}', name: '${item.name.replace(/'/g, "\\'")}', unitPrice: ${item.price} })"
+              class="w-full py-2.5 px-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-black text-xs transition flex items-center justify-center gap-1.5 shadow-2xs"
+            >
+              <span>🛒 加入購物車</span>
+              ${qtyInCart > 0 ? `<span class="px-1.5 py-0.5 rounded-full bg-amber-300 text-slate-950 text-[10px] font-black">已選 ${qtyInCart}</span>` : ""}
+            </button>
           </div>
-
-          <button
-            onclick="openBookingModal('${item.name}（參考報價 $${item.price}）')"
-            class="w-full py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-800 font-bold text-xs transition border border-sky-200/70"
-          >
-            預約此款貼膜 / 詢問型號
-          </button>
-        </div>
-      `).join("");
+        `;
+      }).join("");
     }
 
     // 渲染保護貼品牌篩選與機型查詢
@@ -935,9 +1166,9 @@
           <div class="flex flex-wrap gap-1.5">
             ${g.models.map(m => `
               <button
-                onclick="openBookingModal('${g.brand} - ${m}（保護貼 / 配件諮詢）')"
+                onclick="pickModelToNote('${g.brand.replace(/'/g, "\\'")}', '${m.replace(/'/g, "\\'")}')"
                 class="px-2.5 py-1 rounded-lg bg-white hover:bg-sky-600 hover:text-white text-slate-700 border border-slate-200 hover:border-sky-600 text-xs font-medium transition cursor-pointer"
-                title="點擊帶入此型號預約"
+                title="點擊帶入此型號至訂單備註"
               >
                 ${m}
               </button>
@@ -973,6 +1204,7 @@
       const grid = document.getElementById("cowhornGrid");
       grid.innerHTML = COWHORN_CABLES.map(c => {
         const price = c.prices[cableLength];
+        const qtyInCart = getCartItemQty(`${c.id}__${label}`);
         return `
           <div class="rounded-2xl bg-white/10 backdrop-blur-xs border border-white/15 p-4 flex flex-col justify-between gap-4">
             <div>
@@ -984,16 +1216,17 @@
               <p class="text-xs text-sky-100/75 mt-1">${c.spec}</p>
             </div>
 
-            <div class="flex items-center justify-between pt-2 border-t border-white/10">
+            <div class="flex items-center justify-between pt-2 border-t border-white/10 gap-2">
               <div>
                 <span class="text-xs text-sky-200">售價</span>
                 <span class="text-xl font-black text-sky-300 ml-1">$${price}</span>
               </div>
               <button
-                onclick="openBookingModal('${c.name}（${label} $${price}）')"
-                class="px-3 py-1.5 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 font-black text-xs transition"
+                onclick="addToCart({ id: '${c.id}', name: '${c.name.replace(/'/g, "\\'")}', variant: '${label}', unitPrice: ${price} })"
+                class="px-3.5 py-2 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 font-black text-xs transition flex items-center gap-1"
               >
-                加入預約
+                <span>🛒 加入購物車</span>
+                ${qtyInCart > 0 ? `<span class="px-1.5 py-0.2 rounded-full bg-slate-950 text-amber-300 text-[10px]">${qtyInCart}</span>` : ""}
               </button>
             </div>
           </div>
@@ -1001,7 +1234,7 @@
       }).join("");
     }
 
-    // 分類與商品目錄自動連動（新增新品或新分類時自動出現對應頁籤與「新品」篩選）
+    // 分類與商品目錄自動連動
     function renderCategoryTabs() {
       const hasNew = CATALOG_PRODUCTS.some(p => p.isNew);
       const cats = ["全部"];
@@ -1062,6 +1295,8 @@
 
       grid.innerHTML = filtered.map(p => {
         const displayPrice = p.priceLabel ? p.priceLabel : `NT$${p.price.toLocaleString()}`;
+        const qtyInCart = getCartItemQty(`${p.id}__`);
+        const priceNote = p.priceLabel ? p.priceLabel : "";
         return `
           <div class="rounded-2xl border border-slate-200/90 hover:border-sky-300 bg-white p-4 flex flex-col justify-between gap-3 transition shadow-2xs">
             <div class="space-y-1.5">
@@ -1078,12 +1313,13 @@
             </div>
 
             <div class="flex items-center justify-between pt-2.5 border-t border-slate-100 gap-2">
-              <div class="font-black text-sm sm:text-base text-blue-700">${displayPrice}</div>
+              <div class="font-black text-xs sm:text-sm text-blue-700">${displayPrice}</div>
               <button
-                onclick="openBookingModal('${p.name.replace(/'/g, "\\'")}（${displayPrice}）')"
-                class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-blue-700 text-white font-bold text-xs transition shrink-0"
+                onclick="addToCart({ id: '${p.id}', name: '${p.name.replace(/'/g, "\\'")}', unitPrice: ${p.price}, priceNote: '${priceNote.replace(/'/g, "\\'")}' })"
+                class="px-3 py-2 rounded-xl bg-slate-900 hover:bg-blue-700 text-white font-bold text-xs transition shrink-0 flex items-center gap-1"
               >
-                洽詢 / 預約
+                <span>🛒 加入購物車</span>
+                ${qtyInCart > 0 ? `<span class="px-1.5 py-0.2 rounded-full bg-amber-300 text-slate-950 text-[10px] font-black">${qtyInCart}</span>` : ""}
               </button>
             </div>
           </div>
@@ -1098,6 +1334,7 @@
     renderCowhorn();
     renderCategoryTabs();
     renderCatalog();
+    renderCartUI();
   </script>
 </body>
 </html>
